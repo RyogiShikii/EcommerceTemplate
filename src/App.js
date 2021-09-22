@@ -7,6 +7,7 @@ import Header from './components/header/Header';
 import SignInAndOut from './pages/sign-in-and-sign-out/signInAndOut';
 
 import { getAuth } from '@firebase/auth';
+import { createUserProfileDocument } from './firebase/firebase.utils';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -14,10 +15,11 @@ function App() {
 
   useEffect(() => {
     const subscribe = auth.onAuthStateChanged(user => {
-      setUser(user)
+      setUser(user);
+      createUserProfileDocument(user);
     });
     return subscribe;
-  },[auth])
+  },[auth,user])
 
   return (
     <div>
