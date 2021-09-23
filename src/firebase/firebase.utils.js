@@ -42,15 +42,17 @@ export const signInWithGoogle = () => signInWithPopup(auth, provider)
   // ...
 });
 
+export const Auth = getAuth();
+
 export const createUserProfileDocument = async (authUser, otherData) => {
   if(!authUser) {
-    console.log('failed at first');
+    //console.log('failed at first');
     return;
   };
 
   const userRef = await doc(db,'users',authUser.uid);
   const snapShot = await getDoc(userRef);
-  console.log(snapShot.exists());
+  //console.log(snapShot.exists());
 
   if(!snapShot.exists()){
     const {displayName, email} = authUser;
@@ -68,7 +70,7 @@ export const createUserProfileDocument = async (authUser, otherData) => {
     }
   }
 
-  console.log(userRef);
+  //console.log(userRef);
   return userRef;
 }
 

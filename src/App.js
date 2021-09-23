@@ -6,20 +6,29 @@ import Shop from './pages/shop/shop';
 import Header from './components/header/Header';
 import SignInAndOut from './pages/sign-in-and-sign-out/signInAndOut';
 
-import { getAuth } from '@firebase/auth';
-import { createUserProfileDocument } from './firebase/firebase.utils';
+import { onSnapshot } from 'firebase/firestore';
+import { createUserProfileDocument, Auth } from './firebase/firebase.utils';
 
 function App() {
   const [user, setUser] = useState(null);
-  const auth = getAuth();
 
   useEffect(() => {
-    const subscribe = auth.onAuthStateChanged(user => {
-      setUser(user);
-      createUserProfileDocument(user);
+    const subscribe = Auth.onAuthStateChanged( async userAuth => {
+      if(userAuth){
+        const userRef = await createUserProfileDocument(userAuth);
+        const userSnap = onSnapshot(userRef, user => {
+          setUser({
+            id:user.id,
+            ...user.data()
+          })
+        })
+      }else{
+        setUser(null);
+      }
     });
+    //console.log(user)
     return subscribe;
-  },[auth,user])
+  },[Auth])
 
   return (
     <div>
