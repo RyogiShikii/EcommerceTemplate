@@ -26,7 +26,7 @@ function App() {
         setUser(null);
       }
     });
-    //console.log(user)
+    console.log(user)
     return subscribe;
   },[Auth])
 
