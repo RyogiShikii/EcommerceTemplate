@@ -1,6 +1,8 @@
 import './header.styles.scss';
 import {Link} from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
+import CartIcon from '../cart-icon/cartIcon';
+import CartDropdown from '../cart-dropdown/cartDropdown';
 
 import { getAuth } from '@firebase/auth';
 
@@ -18,7 +20,9 @@ const Header = ({currentUser}) => {
                     <div className='option' onClick={()=>{auth.signOut()}}>SIGN OUT</div> :
                     <Link className='option' to='/signin'>Sign In</Link>
                 }
+                <CartIcon />
             </div>
+            <CartDropdown />
         </div>
     )
 }
