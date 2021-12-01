@@ -4,7 +4,7 @@ import { ReactComponent as Logo } from '../../assets/crown.svg';
 import CartIcon from '../cart-icon/cartIcon';
 import CartDropdown from '../cart-dropdown/cartDropdown';
 
-import { getAuth } from '@firebase/auth';
+import { getAuth } from 'firebase/auth';
 
 const Header = ({currentUser}) => {
     const auth = getAuth();
