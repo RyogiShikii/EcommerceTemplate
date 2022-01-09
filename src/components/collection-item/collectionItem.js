@@ -1,6 +1,7 @@
 import './collectionItem.styles.scss';
 import { addItem } from '../../store/cartSlice';
 import { useDispatch } from 'react-redux';
+import CustomButton from '../customButton/CustomButton';
 
 const CollectionItem = (props) => {
     const dispatch = useDispatch();
@@ -8,12 +9,13 @@ const CollectionItem = (props) => {
         dispatch(addItem({
             id: props.id,
             title:props.name,
-            price:props.price
+            price:props.price,
+            imageUrl:props.imageUrl
         }));
     }
 
     return (
-        <div className='collection-item' onClick={addItemHandler}>
+        <div className='collection-item'>
             <div
                 className='image'
                 style={{backgroundImage:`url(${props.imageUrl})`}}
@@ -22,6 +24,7 @@ const CollectionItem = (props) => {
                 <span className='name'>{props.name}</span>
                 <span className='price'>{props.price}</span>
             </div>
+            <CustomButton inverted onClick={addItemHandler}>Add To Cart</CustomButton>
         </div>
     )
 }

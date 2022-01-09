@@ -24,6 +24,7 @@ const cartSlice = createSlice({
                 state.items.push({
                     id: newItem.id,
                     price:newItem.price,
+                    imageUrl:newItem.imageUrl,
                     quantity: 1,
                     totalAmount: newItem.price,
                     title: newItem.title
