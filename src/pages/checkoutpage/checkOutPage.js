@@ -9,10 +9,33 @@ const CheckOutPage = () => {
     const checkItems = cartItems.map(item => {
         return <CheckOutItem key={item.id} data={item}/>
     })
+    const totalAmount = cartItems.reduce((startAmount, item) => {
+        return startAmount + item.totalAmount
+    },0)
     
     return (
-        <div className='checkout'>
+        <div className='checkout-page'>
+            <div className='checkout-header'>
+                <div className='header-block'>
+                    <span>Product</span>
+                </div>
+                <div className='header-block'>
+                    <span>Description</span>
+                </div>
+                <div className='header-block'>
+                    <span>Quantity</span>
+                </div>
+                <div className='header-block'>
+                    <span>Price</span>
+                </div>
+                <div className='header-block'>
+                    <span>Remove</span>
+                </div>
+            </div>
             {checkItems}
+            <div className='total'>
+                Total: {totalAmount}
+            </div>
         </div>
     )
 }

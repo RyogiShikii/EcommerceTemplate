@@ -1,4 +1,4 @@
-import { addItem } from '../../store/cartSlice';
+import { addItem, decreaseItem } from '../../store/cartSlice';
 import { useDispatch } from 'react-redux';
 
 import './cartDropdownItem.styles.scss';
@@ -13,6 +13,10 @@ const CartDropdownItem = (props) => {
             imageUrl:props.data.imageUrl
         }))
     }
+
+    const decreaseItemHandler = () => {
+        dispatch(decreaseItem(props.data.id));
+    }
     
     return (
         <div className='cart-item'>
@@ -20,7 +24,7 @@ const CartDropdownItem = (props) => {
             <div className='item-details'>
                 <span className='name'>{props.data.title}</span>
                 <div className='quantity'>
-                    <button>-</button>
+                    <button onClick={decreaseItemHandler}>-</button>
                     <span>{props.data.quantity}</span>
                     <button onClick={addItemHandler}>+</button>
                 </div>

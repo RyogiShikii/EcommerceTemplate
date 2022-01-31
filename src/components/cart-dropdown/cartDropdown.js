@@ -1,11 +1,12 @@
 import './cartDropdown.styles.scss';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import CartDropdownItem from '../cartDropdownItem/cartDropdownItem';
-
+import { toggleCart } from '../../store/cartSlice';
 import CustomButton from '../customButton/CustomButton';
 
 const CartDropdown = () => {
+    const dispatch = useDispatch();
     const cartItems = useSelector(state => state.cart.items);
     const items = cartItems.map(item => {
         return <CartDropdownItem key={item.id} data={item} />
@@ -18,7 +19,10 @@ const CartDropdown = () => {
                 {items}
             </div>
             <CustomButton
-                onClick = {() => {history.push('/checkout')}}
+                onClick = {() => {
+                    history.push('/checkout');
+                    dispatch(toggleCart());
+                }}
             >
                 Check Out
             </CustomButton>
