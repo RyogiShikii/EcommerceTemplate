@@ -5,10 +5,12 @@ import CollectionPreview from '../collection-preview/collectionPreview';
 
 const CollectionOverview = () => {
     const shop = useSelector(state => state.shop.shop); 
+    const allCollections = Object.keys(shop).map(key => shop[key]);
+    console.log(allCollections)
     return (
         <div className='collection-overview'>
             {
-                shop.map(item => (
+                allCollections.map(item => (
                     <CollectionPreview key={item.id} {...item} />
                 ))
             }

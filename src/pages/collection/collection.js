@@ -5,16 +5,16 @@ import { useSelector } from "react-redux";
 
 const Collection = (props) => {
     const shop = useSelector(state => state.shop.shop);
-    const collections = shop.filter(item => item.routeName === props.match.params.collectionId);
+    console.log(shop)
+    const collections = shop[props.match.params.collectionId];
+    console.log(collections.items)
     return (
         <div className='collection-page'>
-            <h1 className='title'>{collections[0].title.toUpperCase()}</h1>
+            <h1 className='title'>{collections.title}</h1>
             <div className='items'>
-                {
-                    collections[0].items.map( ({id,...otherItemnProps}) => {
-                        return <CollectionItem key={id} {...otherItemnProps} id={id}/>
-                    })
-                }
+                {collections.items.map(({id,...otherItemProps}) => (
+                    <CollectionItem key={id} id={id} {...otherItemProps} />
+                ))}
             </div>
         </div>
     )
