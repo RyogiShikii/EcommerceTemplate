@@ -6,9 +6,14 @@ import CheckOutItem from '../../components/checkout/checkOutItem';
 
 const CheckOutPage = () => {
     const cartItems = useSelector(state => state.cart.items);
-    const checkItems = cartItems.map(item => {
-        return <CheckOutItem key={item.id} data={item}/>
-    })
+    let checkItems
+    if(cartItems.length === 0){
+        checkItems = <span className='empty-cart'>No items in your cart</span>
+    }else{
+        checkItems = cartItems.map(item => {
+            return <CheckOutItem key={item.id} data={item}/>
+        })
+    }
     const totalAmount = cartItems.reduce((startAmount, item) => {
         return startAmount + item.totalAmount
     },0)

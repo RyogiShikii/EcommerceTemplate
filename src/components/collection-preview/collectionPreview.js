@@ -7,7 +7,12 @@ const CollectionPreview = (props) => {
     return (
         <div className='collection-preview'>
             <h1 className='title'
-                onClick={() => {props.history.push(`/shop/${props.title.toLowerCase()}`)}}
+                onClick={
+                    () => {
+                        props.history.push(`/shop/${props.title.toLowerCase()}`);
+                        window.scrollTo(0,0)
+                    }
+                }
             >
                 {props.title.toUpperCase()}
             </h1>

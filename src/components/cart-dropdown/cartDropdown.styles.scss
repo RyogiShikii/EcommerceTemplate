@@ -16,6 +16,13 @@
       display: flex;
       flex-direction: column;
       overflow: scroll;
+
+      span {
+        width: 100%;
+        text-align: center;
+        font-weight: bold;
+        padding-top: 10px;
+      }
     }
   
     .button {
