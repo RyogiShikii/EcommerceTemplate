@@ -3,6 +3,7 @@ import './checkOutPage.styles.scss';
 import { useSelector } from 'react-redux';
 
 import CheckOutItem from '../../components/checkout/checkOutItem';
+import CheckoutForm from '../../components/checkout/checkoutForm';
 
 const CheckOutPage = () => {
     const cartItems = useSelector(state => state.cart.items);
@@ -41,6 +42,8 @@ const CheckOutPage = () => {
             <div className='total'>
                 Total: {totalAmount}
             </div>
+                <CheckoutForm />
+            
         </div>
     )
 }

@@ -7,11 +7,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+
+const stripePromise = loadStripe('pk_test_A7jK4iCYHL045qgjjfzAfPxu');
+
+
 ReactDOM.render(
   <Provider store={store}>
   <BrowserRouter>
     <React.StrictMode>
-      <App />
+      <Elements stripe={stripePromise}>
+        <App />
+      </Elements>
     </React.StrictMode>
   </BrowserRouter>
   </Provider>,
