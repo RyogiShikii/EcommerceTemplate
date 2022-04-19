@@ -9,7 +9,8 @@ const SignIn = () => {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
 
-    const handlerChange = ({value,name}) => {
+    const handlerChange = (e) => {
+        const {name, value} = e.target;
         if(name==='email'){
             setEmail(value)
         }else if(name==='password'){
@@ -52,7 +53,7 @@ const SignIn = () => {
                 />
                 <div className='buttons'>
                     <CustomButton type='submit'>Sign In</CustomButton>
-                    <CustomButton type='button' onClick={signInWithGoogle} isgooglesignin>Sign In With Google</CustomButton>
+                    <CustomButton type='button' onClick={signInWithGoogle} buttonType='google'>Sign In With Google</CustomButton>
                 </div>
                 
             </form>

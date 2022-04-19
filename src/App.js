@@ -27,7 +27,7 @@ function App() {
         setUser(null);
       }
     });
-    console.log(user)
+    console.log('The current user is:',user)
     return subscribe;
   },[auth])
 

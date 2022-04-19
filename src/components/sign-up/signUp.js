@@ -5,28 +5,21 @@ import CustomButton from '../customButton/CustomButton';
 import FormInput from '../form-input/formInput';
 import './signup.styles.scss';
 
+const formInitial = {
+    displayName:'',
+    email:'',
+    password:'',
+    confirmPassword:'',
+}
+
 const SignUp = () => {
-    const [displayName, setDisplayName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [formInput, setFormInput] = useState(formInitial);
+    const {displayName, email, password, confirmPassword} = formInput;
 
-    const nameChangeHandler = ({value}) => {
-        setDisplayName(value);
+    const changeHandler = (e) => {
+        const {name, value} = e.target;
+        setFormInput({...formInput, [name]: value})
     }
-
-    const emailChangeHandler = ({value}) => {
-        setEmail(value);
-    }
-
-    const passwordChangeHandler = ({value}) => {
-        setPassword(value);
-    }
-
-    const confirmPasswordChangeHandler = ({value}) => {
-        setConfirmPassword(value);
-    }
-    
     const submitHandler = async (e) => {
         e.preventDefault();
 
@@ -42,10 +35,7 @@ const SignUp = () => {
 
             await createUserProfileDocument(user.user,{displayName});
 
-            setDisplayName('');
-            setEmail('');
-            setPassword('');
-            setConfirmPassword('');
+            setFormInput(formInitial);
         } catch (error) {
             console.log('signUp went wrong',error)
         }
@@ -61,7 +51,7 @@ const SignUp = () => {
                     type='text'
                     value={displayName}
                     label='displayName'
-                    handleChange={nameChangeHandler}
+                    handleChange={changeHandler}
                     required
                 />
                 <FormInput
@@ -69,7 +59,7 @@ const SignUp = () => {
                     type='email'
                     value={email}
                     label='email'
-                    handleChange={emailChangeHandler}
+                    handleChange={changeHandler}
                     required
                 />
                 <FormInput
@@ -77,7 +67,7 @@ const SignUp = () => {
                     type='password'
                     value={password}
                     label='password'
-                    handleChange={passwordChangeHandler}
+                    handleChange={changeHandler}
                     required
                 />
                 <FormInput
@@ -85,10 +75,10 @@ const SignUp = () => {
                     type='password'
                     value={confirmPassword}
                     label='confirmPassword'
-                    handleChange={confirmPasswordChangeHandler}
+                    handleChange={changeHandler}
                     required
                 />
-                <CustomButton type='submit'>Sign In</CustomButton>
+                <CustomButton type='submit'>Sign Up</CustomButton>
             </form>
         </div>
     )
