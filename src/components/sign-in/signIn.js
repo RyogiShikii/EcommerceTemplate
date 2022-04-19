@@ -1,8 +1,6 @@
 import './signin.styles.scss';
 import {useState} from 'react';
-import {signInWithGoogle} from '../../firebase/firebase.utils';
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { Auth } from '../../firebase/firebase.utils';
+import {signInWithGoogle, userSignInWithEmailAndPassword} from '../../firebase/firebase.utils';
 
 import FormInput from '../form-input/formInput';
 import CustomButton from '../customButton/CustomButton';
@@ -23,7 +21,7 @@ const SignIn = () => {
         e.preventDefault();
 
         try {
-            await signInWithEmailAndPassword(Auth, email, password);
+            const response = await userSignInWithEmailAndPassword(email, password);
             setEmail('');
             setPassword('');
         } catch (error) {

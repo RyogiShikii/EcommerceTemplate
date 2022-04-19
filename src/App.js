@@ -8,13 +8,13 @@ import SignInAndUp from './pages/sign-in-and-sign-up/signInAndUp';
 import CheckOut from './pages/checkoutpage/checkOutPage';
 
 import { onSnapshot } from 'firebase/firestore';
-import { createUserProfileDocument, Auth } from './firebase/firebase.utils';
+import { createUserProfileDocument, auth } from './firebase/firebase.utils';
 
 function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const subscribe = Auth.onAuthStateChanged( async userAuth => {
+    const subscribe = auth.onAuthStateChanged( async userAuth => {
       if(userAuth){
         const userRef = await createUserProfileDocument(userAuth);
         const userSnap = onSnapshot(userRef, user => {
@@ -29,7 +29,7 @@ function App() {
     });
     console.log(user)
     return subscribe;
-  },[Auth])
+  },[auth])
 
   return (
     <div>

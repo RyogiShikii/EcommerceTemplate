@@ -6,19 +6,18 @@ import store from './store/index';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-import {Elements} from '@stripe/react-stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 
-const stripePromise = loadStripe('pk_test_A7jK4iCYHL045qgjjfzAfPxu');
 
+const stripePromise = loadStripe('api_key');
 
 ReactDOM.render(
   <Provider store={store}>
   <BrowserRouter>
     <React.StrictMode>
       <Elements stripe={stripePromise}>
-        <App />
+      <App />
       </Elements>
     </React.StrictMode>
   </BrowserRouter>

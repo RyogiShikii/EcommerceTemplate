@@ -1,6 +1,5 @@
-import firebase from 'firebase/compat/app';
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { getFirestore } from "firebase/firestore";
 import { collection, setDoc, doc, getDoc } from "firebase/firestore"; 
 
@@ -18,8 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore();
-
-const auth = getAuth();
+export const auth = getAuth();
 
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
@@ -41,8 +39,6 @@ export const signInWithGoogle = () => signInWithPopup(auth, provider)
   const credential = GoogleAuthProvider.credentialFromError(error);
   // ...
 });
-
-export const Auth = getAuth();
 
 export const createUserProfileDocument = async (authUser, otherData) => {
   if(!authUser) {
@@ -74,4 +70,14 @@ export const createUserProfileDocument = async (authUser, otherData) => {
   return userRef;
 }
 
-export default firebase;
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if(!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth,email,password);
+}
+
+export const userSignInWithEmailAndPassword = async (email,password) => {
+  if(!email || !password) return;
+
+  return await signInWithEmailAndPassword(auth, email, password);
+}

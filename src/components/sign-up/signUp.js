@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { Auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+import { createUserProfileDocument, createAuthUserWithEmailAndPassword } from '../../firebase/firebase.utils';
 
 import CustomButton from '../customButton/CustomButton';
 import FormInput from '../form-input/formInput';
@@ -37,7 +36,7 @@ const SignUp = () => {
         }
 
         try {
-            const user = await createUserWithEmailAndPassword(Auth, email, password);
+            const user = await createAuthUserWithEmailAndPassword(email, password);
             //console.log(user);
             //console.log(user.user);
 
