@@ -13,7 +13,7 @@ import { createUserProfileDocument, auth } from './firebase/firebase.utils';
 function App() {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const subscribe = auth.onAuthStateChanged( async userAuth => {
       if(userAuth){
         const userRef = await createUserProfileDocument(userAuth);
@@ -30,7 +30,7 @@ function App() {
     console.log('The current user is:',user)
     return subscribe;
   },[auth])
-
+  */
   return (
     <div>
       <Header currentUser={user}/>
