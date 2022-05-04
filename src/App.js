@@ -25,7 +25,7 @@ function App() {
     })
     console.log('The current user is:',currentUser)
     return subscribe;
-  },[currentUser])
+  },[])
   
   return (
     <div>

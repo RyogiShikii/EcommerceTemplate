@@ -1,10 +1,17 @@
+import { useEffect } from 'react';
 import './collection-overview.styles.scss';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import CollectionPreview from '../collection-preview/collectionPreview';
+import { getShopData } from '../../store/shopSlice';
 
 const CollectionOverview = () => {
-    const shop = useSelector(state => state.shop.shop); 
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getShopData());
+    },[dispatch]);
+
+    const shop = useSelector(state => state.shop.shop);
     const allCollections = Object.keys(shop).map(key => shop[key]);
     //console.log(allCollections)
     return (

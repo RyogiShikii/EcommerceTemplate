@@ -1,4 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { connectFirestoreEmulator } from "@firebase/firestore";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
+export const getShopData = createAsyncThunk('get/getShopData', async () => {
+  return fetch('https://5b3dae8d95bf8d0014a1d78a.mockapi.io/api/v1/meals').then(res=>res.json()).then(res=>console.log(res));
+})
 
 const shopSlice = createSlice({
     name: 'shop',
@@ -249,9 +254,29 @@ const shopSlice = createSlice({
                 }
               ]
             }
-        }
+        },
+        status: null,
+        error: null
     },
-    reducers: {}
+    reducers: {},
+    extraReducers: (builder) => {
+      builder.addCase(getShopData.pending, (state, action) => {
+        state.status = 'loading';
+      });
+      builder.addCase(getShopData.fulfilled, (state, action) => {
+        state.status = 'success';
+      });
+      builder.addCase(getShopData.rejected, (state,action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
+
+      /*
+      [getShopData.fulfilled]: (state,action) => {
+        state.shop = action.payload;
+      }
+      */
+    }
 });
 
 export default shopSlice;
