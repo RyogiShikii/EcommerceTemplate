@@ -1,7 +1,7 @@
 import { addItem, decreaseItem } from '../../store/cartSlice';
 import { useDispatch } from 'react-redux';
 
-import './cartDropdownItem.styles.scss';
+import {CartItemContainer, CartItemDetails, ItemQuantity} from './cartDropdownItem.styles.jsx';
 
 const CartDropdownItem = (props) => {
     const dispatch = useDispatch();
@@ -19,17 +19,17 @@ const CartDropdownItem = (props) => {
     }
     
     return (
-        <div className='cart-item'>
+        <CartItemContainer>
             <img src={props.data.imageUrl} alt="item" />
-            <div className='item-details'>
+            <CartItemDetails>
                 <span className='name'>{props.data.title}</span>
-                <div className='quantity'>
+                <ItemQuantity>
                     <button onClick={decreaseItemHandler}>-</button>
                     <span>{props.data.quantity}</span>
                     <button onClick={addItemHandler}>+</button>
-                </div>
-            </div>
-        </div>
+                </ItemQuantity>
+            </CartItemDetails>
+        </CartItemContainer>
     )
 }
 

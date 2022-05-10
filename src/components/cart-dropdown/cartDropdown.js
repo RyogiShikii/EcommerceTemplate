@@ -1,4 +1,4 @@
-import './cartDropdown.styles.scss';
+import {CartDropdownContainer, CartItem, CartSpan } from'./cartDropdown.styles.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import CartDropdownItem from '../cartDropdownItem/cartDropdownItem';
@@ -11,7 +11,7 @@ const CartDropdown = () => {
     const totalQuantity = useSelector(state => state.cart.totalQuantity);
     let items
     if(totalQuantity === 0 ){
-        items = <span>No items in your cart</span>
+        items = <CartSpan>No items in your cart</CartSpan>
     }else{
         items = cartItems.map(item => {
             return <CartDropdownItem key={item.id} data={item} />
@@ -20,10 +20,10 @@ const CartDropdown = () => {
     const history = useHistory();
 
     return (
-        <div className='cart-dropdown'>
-            <div className='cart-items'>
+        <CartDropdownContainer>
+            <CartItem>
                 {items}
-            </div>
+            </CartItem>
             <CustomButton
                 onClick = {() => {
                     history.push('/checkout');
@@ -32,7 +32,7 @@ const CartDropdown = () => {
             >
                 Check Out
             </CustomButton>
-        </div>
+        </CartDropdownContainer>
     )
 }
 

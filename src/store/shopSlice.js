@@ -1,4 +1,3 @@
-import { connectFirestoreEmulator } from "@firebase/firestore";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getShopData = createAsyncThunk('get/getShopData', async () => {
