@@ -1,4 +1,4 @@
-import './checkOutItem.styles.scss';
+import {CheckoutContainer, ImageContainer, RemoveButton, PriceContainer, QuantityContainer, NameContainer, ValueContainer, ArrowContainer} from './checkOutItem.styles.jsx';
 import { useDispatch } from 'react-redux';
 import { addItem, decreaseItem, removeAllItems } from '../../store/cartSlice';
 
@@ -21,25 +21,25 @@ const CheckOutItem = (props) => {
         dispatch(removeAllItems(props.data.id));
     }
     return (
-        <div className='checkout-item'>
-            <div className='image-container'>
+        <CheckoutContainer>
+            <ImageContainer>
                 <img src={props.data.imageUrl} alt="" />
-            </div>
-            <span className='name'>{props.data.title}</span>
-            <span className='quantity'>
-                <div className='arrow' onClick={handleDecrease}>
+            </ImageContainer>
+            <NameContainer>{props.data.title}</NameContainer>
+            <QuantityContainer>
+                <ArrowContainer onClick={handleDecrease}>
                     &#10094;
-                </div>
-                <span className='value'>{props.data.quantity}</span>
-                <div className='arrow' onClick={handleAdd}>
+                </ArrowContainer>
+                <ValueContainer>{props.data.quantity}</ValueContainer>
+                <ArrowContainer onClick={handleAdd}>
                     &#10095;
-                </div>
-            </span>
-            <span className='price'>{props.data.price}</span>
-            <div className='remove-button' onClick={removeAll}>
+                </ArrowContainer>
+            </QuantityContainer>
+            <PriceContainer>{props.data.price}</PriceContainer>
+            <RemoveButton onClick={removeAll}>
                 &#10005;
-            </div>
-        </div>
+            </RemoveButton>
+        </CheckoutContainer>
     )
 }
 
