@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import MenuItem from '../menu-item/menu-item';
-import './directory.styles.scss';
+import {DirectoryMenu} from './directory.styles.jsx';
 
 const Directory = () => {
     const sections = useSelector(state => state.directory.sections);
@@ -10,9 +10,9 @@ const Directory = () => {
     })
 
     return (
-        <div className='directory-menu'>
+        <DirectoryMenu>
             {items}
-        </div>
+        </DirectoryMenu>
     )
 }
 

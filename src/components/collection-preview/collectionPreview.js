@@ -1,12 +1,12 @@
-import './collectionpreview.styles.scss';
+import {CollectionPreviewContainer, PreviewItem} from './collectionpreview.styles.jsx';
 import { withRouter } from 'react-router';
 
 import CollectionItem from '../collection-item/collectionItem';
 
 const CollectionPreview = (props) => {
     return (
-        <div className='collection-preview'>
-            <h1 className='title'
+        <CollectionPreviewContainer>
+            <h1
                 onClick={
                     () => {
                         props.history.push(`/shop/${props.title.toLowerCase()}`);
@@ -16,14 +16,14 @@ const CollectionPreview = (props) => {
             >
                 {props.title.toUpperCase()}
             </h1>
-            <div className='preview'>
+            <PreviewItem>
                 {
                     props.items.filter((item,index) => index < 4).map( ({id,...otherItemnProps}) => {
                         return <CollectionItem key={id} {...otherItemnProps} id={id}/>
                     })
                 }
-            </div>
-        </div>
+            </PreviewItem>
+        </CollectionPreviewContainer>
     )
 }
 
