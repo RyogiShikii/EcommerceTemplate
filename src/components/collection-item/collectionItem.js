@@ -1,4 +1,4 @@
-import './collectionItem.styles.scss';
+import {CollectionItemnContainer, ItemImage, CollectionFooter, ItemName, ItemPrice} from './collectionItem.styles.jsx';
 import { addItem } from '../../store/cartSlice';
 import { useDispatch } from 'react-redux';
 import CustomButton from '../customButton/CustomButton';
@@ -15,17 +15,14 @@ const CollectionItem = (props) => {
     }
 
     return (
-        <div className='collection-item'>
-            <div
-                className='image'
-                style={{backgroundImage:`url(${props.imageUrl})`}}
-            />
-            <div className='collection-footer'>
-                <span className='name'>{props.name}</span>
-                <span className='price'>{props.price}</span>
-            </div>
+        <CollectionItemnContainer>
+            <ItemImage backgroundImg={props.imageUrl}/>
+            <CollectionFooter>
+                <ItemName>{props.name}</ItemName>
+                <ItemPrice>{props.price}</ItemPrice>
+            </CollectionFooter>
             <CustomButton buttonType='inverted' onClick={addItemHandler}>Add To Cart</CustomButton>
-        </div>
+        </CollectionItemnContainer>
     )
 }
 

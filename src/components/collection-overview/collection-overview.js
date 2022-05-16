@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import './collection-overview.styles.scss';
+import {CollectionOverviewContainer} from './collection-overview.styles.jsx';
 
 import { useSelector, useDispatch } from 'react-redux';
 import CollectionPreview from '../collection-preview/collectionPreview';
@@ -15,13 +15,13 @@ const CollectionOverview = () => {
     const allCollections = Object.keys(shop).map(key => shop[key]);
     //console.log(allCollections)
     return (
-        <div className='collection-overview'>
+        <CollectionOverviewContainer>
             {
                 allCollections.map(item => (
                     <CollectionPreview key={item.id} {...item} />
                 ))
             }
-        </div>
+        </CollectionOverviewContainer>
     )
 }
 
