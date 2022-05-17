@@ -1,4 +1,4 @@
-import './header.styles.scss';
+import {HeaderContainer, LogoContainer, OptionContainer, OptionsContainer, OptionLink} from './header.styles.jsx';
 import {Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleCart } from '../../store/cartSlice';
@@ -17,21 +17,21 @@ const Header = ({currentUser}) => {
         dispatch(toggleCart());
     }
     return (
-        <div className='header'>
-            <Link className='logo-container' to='/'>
-                <Logo className='logo' />
-            </Link>
-            <div className='options'>
-                <Link className='option' to='/shop'>SHOP</Link>
-                <Link className='option' to='/contact'>CONTACT</Link>
+        <HeaderContainer>
+            <LogoContainer to='/'>
+                <Logo/>
+            </LogoContainer>
+            <OptionsContainer>
+                <OptionLink to='/shop'>SHOP</OptionLink>
+                <OptionLink to='/contact'>CONTACT</OptionLink>
                 {currentUser? 
-                    <div className='option' onClick={()=>{auth.signOut()}}>SIGN OUT</div> :
-                    <Link className='option' to='/signin'>Sign In</Link>
+                    <OptionContainer onClick={()=>{auth.signOut()}}>SIGN OUT</OptionContainer> :
+                    <OptionLink to='/signin'>Sign In</OptionLink>
                 }
                 <CartIcon onClick={toggleButton} totalQuantity={totalQuantity}/>
-            </div>
+            </OptionsContainer>
             {isCartShow && <CartDropdown />}
-        </div>
+        </HeaderContainer>
     )
 }
 
