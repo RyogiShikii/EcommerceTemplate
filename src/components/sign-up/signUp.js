@@ -3,7 +3,7 @@ import { createUserProfileDocument, createAuthUserWithEmailAndPassword } from '.
 
 import CustomButton from '../customButton/CustomButton';
 import FormInput from '../form-input/formInput';
-import './signup.styles.scss';
+import {SignupContainer} from './signup.styles.jsx';
 
 const formInitial = {
     displayName:'',
@@ -42,7 +42,7 @@ const SignUp = () => {
     }
     
     return (
-        <div className='sign-up'>
+        <SignupContainer>
             <h2>Sign Up</h2>
             <span>I do not have an account</span>
             <form onSubmit={submitHandler}>
@@ -80,7 +80,7 @@ const SignUp = () => {
                 />
                 <CustomButton type='submit'>Sign Up</CustomButton>
             </form>
-        </div>
+        </SignupContainer>
     )
 }
 

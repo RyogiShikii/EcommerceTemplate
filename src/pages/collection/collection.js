@@ -1,5 +1,5 @@
 import CollectionItem from "../../components/collection-item/collectionItem";
-import './collection.styles.scss';
+import {CollectionContainer, Items} from './collection.styles.jsx';
 
 import { useSelector } from "react-redux";
 
@@ -9,14 +9,14 @@ const Collection = (props) => {
     const collections = shop[props.match.params.collectionId];
     console.log(collections.items)
     return (
-        <div className='collection-page'>
-            <h1 className='title'>{collections.title}</h1>
-            <div className='items'>
+        <CollectionContainer>
+            <h1>{collections.title}</h1>
+            <Items>
                 {collections.items.map(({id,...otherItemProps}) => (
                     <CollectionItem key={id} id={id} {...otherItemProps} />
                 ))}
-            </div>
-        </div>
+            </Items>
+        </CollectionContainer>
     )
 };
 

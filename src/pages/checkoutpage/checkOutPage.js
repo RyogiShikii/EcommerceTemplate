@@ -1,4 +1,4 @@
-import './checkOutPage.styles.scss';
+import {CheckoutPageContainer, CheckoutHeader, HeaderBlock, Total, EmptyCart} from './checkOutPage.styles.jsx';
 
 import { useSelector } from 'react-redux';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
@@ -11,7 +11,7 @@ const CheckOutPage = () => {
     const cartItems = useSelector(state => state.cart.items);
     let checkItems
     if(cartItems.length === 0){
-        checkItems = <span className='empty-cart'>No items in your cart</span>
+        checkItems = <EmptyCart>No items in your cart</EmptyCart>
     }else{
         checkItems = cartItems.map(item => {
             return <CheckOutItem key={item.id} data={item}/>
@@ -51,33 +51,33 @@ const CheckOutPage = () => {
     }
     
     return (
-        <div className='checkout-page'>
-            <div className='checkout-header'>
-                <div className='header-block'>
+        <CheckoutPageContainer>
+            <CheckoutHeader>
+                <HeaderBlock>
                     <span>Product</span>
-                </div>
-                <div className='header-block'>
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Description</span>
-                </div>
-                <div className='header-block'>
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Quantity</span>
-                </div>
-                <div className='header-block'>
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Price</span>
-                </div>
-                <div className='header-block'>
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Remove</span>
-                </div>
-            </div>
+                </HeaderBlock>
+            </CheckoutHeader>
             {checkItems}
-            <div className='total'>
+            <Total>
                 Total: {totalAmount}
-            </div>
+            </Total>
             <form onSubmit={handleSubmit}>
                 <CardElement />
                 <button type="submit">pay</button>
             </form>
-        </div>
+        </CheckoutPageContainer>
     )
 }
 

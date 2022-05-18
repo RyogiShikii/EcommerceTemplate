@@ -1,4 +1,4 @@
-import './signin.styles.scss';
+import {SignInContainer, ButtonsContainer} from './signin.styles.jsx';
 import {useState} from 'react';
 import {signInWithGoogle, userSignInWithEmailAndPassword} from '../../firebase/firebase.utils';
 
@@ -31,7 +31,7 @@ const SignIn = () => {
     }
 
     return (
-        <div className='sign-in'>
+        <SignInContainer>
             <h2>Sign In</h2>
             <span>I already have an account</span>
             <form onSubmit={submitHandler}>
@@ -51,13 +51,13 @@ const SignIn = () => {
                     handleChange={handlerChange}
                     required
                 />
-                <div className='buttons'>
+                <ButtonsContainer>
                     <CustomButton type='submit'>Sign In</CustomButton>
                     <CustomButton type='button' onClick={signInWithGoogle} buttonType='google'>Sign In With Google</CustomButton>
-                </div>
+                </ButtonsContainer>
                 
             </form>
-        </div>
+        </SignInContainer>
     )
 }
 
