@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore } from "firebase/firestore";
-import { collection, setDoc, doc, getDoc } from "firebase/firestore"; 
+import { collection, setDoc, doc, getDoc, writeBatch } from "firebase/firestore"; 
 
 const firebaseConfig = {
     apiKey: "AIzaSyC-xUtpYJQq2NTAoGvF5EUJpY4WkWR5XCk",
@@ -39,6 +39,16 @@ export const signInWithGoogle = () => signInWithPopup(auth, provider)
   const credential = GoogleAuthProvider.credentialFromError(error);
   // ...
 });
+
+export const addDataIntoFirebase = async (collectionId, data) => {
+  const collectionRef = await collection(db,collectionId);
+  const batch = writeBatch(db);
+
+  data.forEach(object => {
+    const docRef = doc(collectionRef,object.title.toLowercase());
+    batch.set(docRef, object)
+  })
+}
 
 export const createUserProfileDocument = async (authUser, otherData) => {
   if(!authUser) {
