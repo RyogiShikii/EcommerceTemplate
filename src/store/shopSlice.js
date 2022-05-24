@@ -1,7 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getDataFromFirebase } from "../firebase/firebase.utils";
 
 export const getShopData = createAsyncThunk('get/getShopData', async () => {
-  return fetch('https://5b3dae8d95bf8d0014a1d78a.mockapi.io/api/v1/meals').then(res=>res.json()).then(res=>console.log(res));
+  const data =  await getDataFromFirebase();
+  return data;
+  //return fetch('https://5b3dae8d95bf8d0014a1d78a.mockapi.io/api/v1/meals').then(res=>res.json()).then(res=>console.log(res));
 })
 
 const shopSlice = createSlice({

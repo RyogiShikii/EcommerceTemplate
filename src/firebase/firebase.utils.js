@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore } from "firebase/firestore";
-import { collection, setDoc, doc, getDoc, writeBatch } from "firebase/firestore"; 
+import { collection, setDoc, doc, getDoc, writeBatch, query, getDocs } from "firebase/firestore"; 
 
 const firebaseConfig = {
     apiKey: "AIzaSyC-xUtpYJQq2NTAoGvF5EUJpY4WkWR5XCk",
@@ -45,9 +45,26 @@ export const addDataIntoFirebase = async (collectionId, data) => {
   const batch = writeBatch(db);
 
   data.forEach(object => {
-    const docRef = doc(collectionRef,object.title.toLowercase());
+    const docRef = doc(collectionRef,object.title.toLowerCase());
     batch.set(docRef, object)
-  })
+  });
+
+  await batch.commit();
+  console.log('upload data into firebase done')
+}
+
+export const getDataFromFirebase = async () => {
+  const collectionRef = collection(db, 'shopData');
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  const shopMap = querySnapshot.docs.reduce((acc, doc) => {
+    const {title, items} = doc.data();
+    acc[title.toLowerCase()] = items;
+    return acc
+  },{});
+  console.log(shopMap);
+  return shopMap;
 }
 
 export const createUserProfileDocument = async (authUser, otherData) => {
