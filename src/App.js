@@ -1,11 +1,12 @@
 import './App.css';
 import { useEffect } from 'react';
 import HomePage from './pages/homepage/homepage';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import Shop from './pages/shop/shop';
 import Header from './components/header/Header';
 import SignInAndUp from './pages/sign-in-and-sign-up/signInAndUp';
 import CheckOut from './pages/checkoutpage/checkOutPage';
+import { getShopData } from './store/shopSlice';
 
 import { onAuthStateChangedListener} from './firebase/firebase.utils';
 import { setCurrentUser } from './store/userSlice';
@@ -23,15 +24,19 @@ function App() {
         dispatch(setCurrentUser(null))
       }
     })
-    console.log('The current user is:',currentUser)
     return subscribe;
-  },[])
-  
+  },[dispatch]);
+
+  useEffect(() => {
+    dispatch(getShopData());
+  },[dispatch]);
+
   return (
     <div>
       <Header currentUser={currentUser}/>
       <Switch>
         <Route exact path='/' component={HomePage} />
+        {currentUser? <Redirect to='/' component={HomePage} />:<Route exact path='/' component={HomePage} />}
         <Route path='/shop' component={Shop} />
         <Route path='/signin' component={SignInAndUp} />
         <Route path='/checkout' component={CheckOut} />

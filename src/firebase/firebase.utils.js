@@ -63,7 +63,6 @@ export const getDataFromFirebase = async () => {
     acc[title.toLowerCase()] = items;
     return acc
   },{});
-  console.log(shopMap);
   return shopMap;
 }
 

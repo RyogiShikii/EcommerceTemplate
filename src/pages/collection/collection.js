@@ -7,12 +7,12 @@ const Collection = (props) => {
     const shop = useSelector(state => state.shop.shop);
     //console.log(shop)
     const collections = shop[props.match.params.collectionId];
-    //console.log(collections.items)
+    //console.log(collections)
     return (
         <CollectionContainer>
-            <h1>{collections.title}</h1>
+            <h1>{props.match.params.collectionId.toUpperCase()}</h1>
             <Items>
-                {collections.items.map(({id,...otherItemProps}) => (
+                {collections.map(({id,...otherItemProps}) => (
                     <CollectionItem key={id} id={id} {...otherItemProps} />
                 ))}
             </Items>
