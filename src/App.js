@@ -36,7 +36,6 @@ function App() {
       <Header currentUser={currentUser}/>
       <Switch>
         <Route exact path='/' component={HomePage} />
-        {currentUser? <Redirect to='/' component={HomePage} />:<Route exact path='/' component={HomePage} />}
         <Route path='/shop' component={Shop} />
         <Route path='/signin' component={SignInAndUp} />
         <Route path='/checkout' component={CheckOut} />
