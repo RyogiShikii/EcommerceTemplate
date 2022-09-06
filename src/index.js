@@ -7,10 +7,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Elements } from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
-
-
-const stripePromise = loadStripe('api_key');
+import {stripePromise} from './stripe/stripe.utils';
 
 ReactDOM.render(
   <Provider store={store}>
