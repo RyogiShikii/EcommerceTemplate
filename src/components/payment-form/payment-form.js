@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
-import CustomButton from "../customButton/CustomButton";
-import { PaymentFormContainer, FormContainer } from "./payment-form.styles";
+import { PaymentFormContainer, FormContainer, PaymentButton } from "./payment-form.styles";
 
 const PaymentForm = () => {
     const stripe = useStripe();
@@ -61,7 +60,7 @@ const PaymentForm = () => {
             <FormContainer onSubmit={paymentHandler}>
                 <h2>Credit Card Payment: </h2>
                 <CardElement />
-                <CustomButton disabled={isProcessingPayment} buttonType='inverted'>Pay now</CustomButton>
+                <PaymentButton isLoading={isProcessingPayment} buttonType='inverted'>Pay now</PaymentButton>
             </FormContainer>
         </PaymentFormContainer>
     )
